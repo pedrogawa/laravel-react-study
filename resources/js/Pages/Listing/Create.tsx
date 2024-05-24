@@ -1,6 +1,5 @@
 import { Formik, Form } from "formik";
-import axios from "axios";
-import api from "@/api";
+import { Inertia } from "@inertiajs/inertia";
 
 interface FormValues {
     beds: number;
@@ -29,7 +28,18 @@ export default function Create() {
         <Formik
             initialValues={initialValues}
             onSubmit={async (values: FormValues) => {
-                await api.post("/listing", values);
+                Inertia.post(
+                    "/listing",
+                    { ...values },
+                    {
+                        onError: (errors) => {
+                            console.error(errors);
+                        },
+                        onSuccess: (page) => {
+                            console.log(page);
+                        },
+                    }
+                );
             }}
         >
             {({ values, handleChange, handleBlur }) => (

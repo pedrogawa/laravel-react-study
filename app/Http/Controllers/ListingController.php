@@ -33,7 +33,9 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        Listing::create($request->all());
+        
+        return redirect()->route('listing.index');
     }
 
     /**
