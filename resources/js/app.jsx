@@ -1,4 +1,4 @@
-import { createInertiaApp } from '@inertiajs/react'
+import { createInertiaApp } from '@inertiajs/inertia-react'
 import { createRoot } from 'react-dom/client'
 import MainLayout from './Layouts/MainLayout';
 
@@ -9,7 +9,6 @@ createInertiaApp({
     let page = pages[`./Pages/${name}.tsx`]
     page.default.layout = page.default.layout || (page => <MainLayout children={page} />)
     return page
-    // return pages[`./Pages/${name}.tsx`]
   },
   setup({ el, App, props }) {
     createRoot(el).render(<App {...props} />)

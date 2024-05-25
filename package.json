@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-react": "^0.8.1",
         "@inertiajs/react": "^1.0.16",
         "formik": "^2.4.6",
         "react": "^18.3.1",
