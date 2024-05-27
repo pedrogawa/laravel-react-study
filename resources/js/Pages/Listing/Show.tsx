@@ -25,11 +25,8 @@ export default function Show({ listing }: ShowProps) {
         }
     }
 
-    const monthlyPayment = calculateMonthlyPayment(
-        interestSlider,
-        listing.price,
-        durationSlider
-    );
+    const { monthlyPayment, totalPaid, totalInterest } =
+        calculateMonthlyPayment(interestSlider, listing.price, durationSlider);
 
     return (
         <div className="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
@@ -80,6 +77,27 @@ export default function Show({ listing }: ShowProps) {
                                 Your monthly payment
                             </div>
                             <Price price={monthlyPayment} size="large" />
+                        </div>
+
+                        <div className="text-gray-500">
+                            <div className="flex justify-between">
+                                <div>Total paid</div>
+                                <div>
+                                    <Price price={totalPaid} size="small" />
+                                </div>
+                            </div>
+                            <div className="flex justify-between">
+                                <div>Principal paid</div>
+                                <div>
+                                    <Price price={listing.price} size="small" />
+                                </div>
+                            </div>
+                            <div className="flex justify-between">
+                                <div>Interest paid</div>
+                                <div>
+                                    <Price price={totalInterest} size="small" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Box>

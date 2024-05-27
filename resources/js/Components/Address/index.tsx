@@ -9,7 +9,7 @@ interface AddressProps {
 }
 
 export default function AddressCard({ listing, isCard }: AddressProps) {
-    const monthlyPayment = calculateMonthlyPayment(2.5, listing.price, 20);
+    const { monthlyPayment } = calculateMonthlyPayment(2.5, listing.price, 20);
 
     return (
         <div>

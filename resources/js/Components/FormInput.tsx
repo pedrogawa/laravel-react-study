@@ -23,6 +23,8 @@ export default function FormInput({
             price: "Price",
             street_nr: "Street Number",
             street: "Street",
+            email: "E-mail",
+            password: "Password",
         };
 
         return label[name] ?? "Unnamed";
@@ -35,7 +37,7 @@ export default function FormInput({
             </label>
             <input
                 className="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500"
-                type="text"
+                type={name === "password" ? "password" : "text"}
                 name={name}
                 id={name}
                 onChange={handleChange}

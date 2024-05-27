@@ -13,5 +13,8 @@ export default function calculateMonthlyPayment(
             Math.pow(1 + monthlyInterest, numberOfPaymentsMonths)) /
         (Math.pow(1 + monthlyInterest, numberOfPaymentsMonths) - 1);
 
-    return monthlyPayment;
+    const totalPaid = duration * 12 * monthlyPayment;
+    const totalInterest = totalPaid - price;
+
+    return { monthlyPayment, totalPaid, totalInterest };
 }
