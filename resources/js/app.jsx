@@ -1,6 +1,7 @@
 import { createInertiaApp } from '@inertiajs/inertia-react'
 import { createRoot } from 'react-dom/client'
 import MainLayout from './Layouts/MainLayout';
+import '../css/app.css';
 
 createInertiaApp({
   id: 'app',

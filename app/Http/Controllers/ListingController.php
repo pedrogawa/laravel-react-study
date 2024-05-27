@@ -24,9 +24,7 @@ class ListingController extends Controller
      */
     public function create()
     {
-        return inertia('Listing/Create',
-        
-    );
+        return inertia('Listing/Create');
     }
 
     /**
@@ -34,6 +32,18 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'beds' => 'required|integer|min:1',
+            'baths' => 'required|integer|min:1',
+            'area' => 'required|integer|min:15',
+            'city' => 'required',
+            'code' => 'required',
+            'street' => 'required',
+            'street_nr' => 'required|min:1',
+            'price' => 'required|integer|min:10000'
+
+        ]);
+
         Listing::create($request->all());
         
         return redirect('/listing')->with('success', 'Listing was created!');
@@ -53,24 +63,42 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Listing $listing)
     {
-        //
+        return inertia('Listing/Edit', [
+            'listing' => $listing
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Listing $listing)
     {
-        //
+        $listing->update(
+            $request->validate([
+                'beds' => 'required|integer|min:1',
+                'baths' => 'required|integer|min:1',
+                'area' => 'required|integer|min:15',
+                'city' => 'required',
+                'code' => 'required',
+                'street' => 'required',
+                'street_nr' => 'required|min:1',
+                'price' => 'required|integer|min:10000'
+    
+            ])
+        );
+        
+        return redirect('/listing')->with('success', 'Listing was changed!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Listing $listing)
     {
-        //
+        $listing->delete();
+
+        return redirect()->back()->with('success', 'Listing was deleted!');
     }
 }
