@@ -11,8 +11,10 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
     const route = useRoute();
-    const { flash } = usePage().props as any;
+    const { flash, user } = usePage().props as any;
     useNotify(flash);
+
+    console.log(user);
 
     return (
         <main>
@@ -31,12 +33,28 @@ export default function MainLayout({ children }: MainLayoutProps) {
                         >
                             LaraZillow
                         </Link>
-                        <Link
-                            href={route("listing.create")}
-                            className="btn-primary"
-                        >
-                            + New Listing
-                        </Link>
+                        {user && (
+                            <div className="flex items-center gap-4">
+                                <div className="text-gray-500 dark:text-gray-400">
+                                    {user.name}
+                                </div>
+
+                                <Link
+                                    href={route("listing.create")}
+                                    className="btn-primary"
+                                >
+                                    + New Listing
+                                </Link>
+                                <Link
+                                    href={route("logout")}
+                                    method="delete"
+                                    as="button"
+                                >
+                                    Logout
+                                </Link>
+                            </div>
+                        )}
+                        {!user && <Link href={route("login")}>Sign-In</Link>}
                     </nav>
                 </div>
             </header>
