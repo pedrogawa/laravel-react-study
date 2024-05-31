@@ -15,6 +15,7 @@ export default function FormInput({
 }: FormInputProps) {
     function getLabel(name: string) {
         const label = {
+            name: "Name",
             code: "Code",
             beds: "Beds",
             baths: "Baths",
@@ -25,6 +26,7 @@ export default function FormInput({
             street: "Street",
             email: "E-mail",
             password: "Password",
+            password_confirmation: "Confirm Password",
         };
 
         return label[name] ?? "Unnamed";
@@ -37,7 +39,11 @@ export default function FormInput({
             </label>
             <input
                 className="block w-full p-2 rounded-md shadow-sm border border-gray-300 dark:border-gray-600 text-gray-500"
-                type={name === "password" ? "password" : "text"}
+                type={
+                    name === "password" || name === "password_confirmation"
+                        ? "password"
+                        : "text"
+                }
                 name={name}
                 id={name}
                 onChange={handleChange}

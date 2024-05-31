@@ -14,8 +14,6 @@ export default function MainLayout({ children }: MainLayoutProps) {
     const { flash, user } = usePage().props as any;
     useNotify(flash);
 
-    console.log(user);
-
     return (
         <main>
             <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-full">
@@ -54,7 +52,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
                                 </Link>
                             </div>
                         )}
-                        {!user && <Link href={route("login")}>Sign-In</Link>}
+                        {!user && (
+                            <div className="flex items-center gap-6">
+                                <Link href={route("user-account.create")}>
+                                    Register
+                                </Link>
+                                <Link href={route("login")}>Sign-In</Link>
+                            </div>
+                        )}
                     </nav>
                 </div>
             </header>
