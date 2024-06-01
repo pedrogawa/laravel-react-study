@@ -1,4 +1,4 @@
-import { Listing } from "@/Pages/Listing/Index";
+import Listing from "@/Interface/Listing";
 
 interface AddressInfoProps {
     listing: Listing;

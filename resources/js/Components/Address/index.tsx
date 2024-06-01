@@ -1,4 +1,4 @@
-import { Listing } from "@/Pages/Listing/Index";
+import Listing from "@/Interface/Listing";
 import calculateMonthlyPayment from "@/Utils/calculateMonthlyPayment";
 import AddressInfo from "./AddressInfo";
 import Price from "./Price";
