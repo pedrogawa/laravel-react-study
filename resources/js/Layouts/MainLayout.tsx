@@ -33,9 +33,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
                         </Link>
                         {user && (
                             <div className="flex items-center gap-4">
-                                <div className="text-gray-500 dark:text-gray-400">
+                                <Link
+                                    href={route("realtor.listing.index")}
+                                    className="text-gray-500 dark:text-gray-400"
+                                >
                                     {user.name}
-                                </div>
+                                </Link>
 
                                 <Link
                                     href={route("listing.create")}
