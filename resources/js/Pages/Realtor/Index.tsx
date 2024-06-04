@@ -1,25 +1,30 @@
 import AddressInfo from "@/Components/Address/AddressInfo";
 import Price from "@/Components/Address/Price";
 import Box from "@/Components/Box";
+import PaginationComponent from "@/Components/Pagination";
 import Listing from "@/Interface/Listing";
+import Pagination from "@/Interface/Pagination";
 import { Link } from "@inertiajs/inertia-react";
 import { useRoute } from "ziggy-js";
+import RealtorFilters from "./Components/Filters";
 
 interface RealtorProps {
-    listings: Listing[];
+    listings: Pagination<Listing>;
+    filters: {
+        by: string;
+        deleted: boolean;
+        order: string;
+    };
 }
 
-export default function Realtor({ listings }: RealtorProps) {
+export default function Realtor({ listings, filters }: RealtorProps) {
     const route = useRoute();
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-4">
-                <h1 className="text-3xl">Your Listings</h1>
-                <section className="">Filters</section>
-            </div>
+            <RealtorFilters filters={filters} />
             <section className="grid grid-cols-1 lg:grid-cols-2 gap-2">
-                {listings.map((listing) => (
+                {listings.data.map((listing) => (
                     <Box key={listing.id}>
                         <div className="flex flex-col md:flex-row gap-2 md:items-center justify-between">
                             <div>
@@ -49,7 +54,11 @@ export default function Realtor({ listings }: RealtorProps) {
                                     Edit
                                 </Link>
                                 <Link
-                                    href=""
+                                    href={route("realtor.listing.destroy", {
+                                        listing: listing.id,
+                                    })}
+                                    as="button"
+                                    method="delete"
                                     className="btn-outline text-xs font-medium"
                                 >
                                     Delete
@@ -59,6 +68,11 @@ export default function Realtor({ listings }: RealtorProps) {
                     </Box>
                 ))}
             </section>
+            {listings.data.length > 0 && (
+                <div className="w-full flex justify-center">
+                    <PaginationComponent links={listings.links} />
+                </div>
+            )}
         </div>
     );
 }

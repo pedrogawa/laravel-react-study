@@ -4,6 +4,7 @@ import { useRoute } from "ziggy-js";
 
 import { useForm } from "@inertiajs/inertia-react";
 import Filters from "@/Interface/Filters";
+import updateFormData from "@/Utils/updateFormData";
 
 interface FiltersProps {
     filters: Filters;
@@ -32,16 +33,7 @@ export default function FiltersComponent({ filters }: FiltersProps) {
     ) {
         const { name, value } = event.target;
 
-        switch (name) {
-            case "beds":
-            case "baths":
-            case "priceFrom":
-            case "priceTo":
-            case "areaFrom":
-            case "areaTo":
-                setData(name, value);
-                break;
-        }
+        updateFormData(name, value, setData, data);
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -85,18 +77,32 @@ export default function FiltersComponent({ filters }: FiltersProps) {
                 <div className="flex flex-nowrap items-center">
                     <Select
                         handleChange={handleChange}
-                        placeholder="Beds"
                         side="left"
                         value={data.beds}
                         name="beds"
-                    />
+                    >
+                        <option value="">Beds</option>
+                        {[...Array(5)].map((_, index) => (
+                            <option value={index + 1} key={index}>
+                                {index + 1}
+                            </option>
+                        ))}
+                        <option>6+</option>
+                    </Select>
                     <Select
                         handleChange={handleChange}
-                        placeholder="Baths"
                         side="right"
                         value={data.baths}
                         name="baths"
-                    />
+                    >
+                        <option value="">Baths</option>
+                        {[...Array(5)].map((_, index) => (
+                            <option value={index + 1} key={index}>
+                                {index + 1}
+                            </option>
+                        ))}
+                        <option>6+</option>
+                    </Select>
                 </div>
                 <div className="flex flex-nowrap items-center">
                     <Input

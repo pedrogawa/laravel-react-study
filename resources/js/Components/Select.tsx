@@ -1,17 +1,17 @@
 interface SelectProps {
-    placeholder: string;
     side: "right" | "left";
     value: string;
     handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
     name: string;
+    children: React.ReactNode;
 }
 
-export default function Input({
+export default function Select({
     name,
     side,
     value,
-    placeholder,
     handleChange,
+    children,
 }: SelectProps) {
     const className =
         side === "right" ? "right-filter-input" : "left-filter-input";
@@ -23,13 +23,7 @@ export default function Input({
             id={name}
             name={name}
         >
-            <option value="">{placeholder}</option>
-            {[...Array(5)].map((_, index) => (
-                <option value={index + 1} key={index}>
-                    {index + 1}
-                </option>
-            ))}
-            <option>6+</option>
+            {children}
         </select>
     );
 }

@@ -1,8 +1,8 @@
 import { useForm } from "@inertiajs/inertia-react";
 import React from "react";
-import { Listing } from "./Index";
 import { useRoute } from "ziggy-js";
 import FormInput from "@/Components/FormInput";
+import Listing from "@/Interface/Listing";
 
 interface EditProps {
     listing: Listing;

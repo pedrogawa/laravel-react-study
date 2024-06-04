@@ -1,4 +1,5 @@
 import FormInput from "@/Components/FormInput";
+import updateFormData from "@/Utils/updateFormData";
 import { useForm, Link } from "@inertiajs/inertia-react";
 import { useRoute } from "ziggy-js";
 
@@ -13,11 +14,7 @@ export default function Login() {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
 
-        switch (name) {
-            case "email":
-            case "password":
-                setData(name, value);
-        }
+        updateFormData(name, value, setData, data);
     }
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {

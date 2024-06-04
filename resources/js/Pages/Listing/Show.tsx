@@ -1,9 +1,9 @@
 import Address from "@/Components/Address";
 import Price from "@/Components/Address/Price";
 import Box from "@/Components/Box";
+import Listing from "@/Interface/Listing";
 import calculateMonthlyPayment from "@/Utils/calculateMonthlyPayment";
 import React, { useState } from "react";
-import { Listing } from "./Index";
 
 interface ShowProps {
     listing: Listing;

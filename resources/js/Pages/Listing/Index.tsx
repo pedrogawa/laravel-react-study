@@ -28,15 +28,6 @@ export default function Index({ listings, filters }: IndexProps) {
                             <Link href={route("listing.edit", listing.id)}>
                                 Edit
                             </Link>
-                            <div>
-                                <Link
-                                    href={route("listing.destroy", listing.id)}
-                                    method="delete"
-                                    as="button"
-                                >
-                                    Delete
-                                </Link>
-                            </div>
                         </Box>
                     );
                 })}
