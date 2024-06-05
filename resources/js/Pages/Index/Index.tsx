@@ -1,5 +1,3 @@
-import MainLayout from "@/Layouts/MainLayout";
-
 interface IndexProps {
     message: string;
 }

@@ -37,7 +37,7 @@ export default function Create() {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        post(route("listing.store"));
+        post(route("realtor.listing.store"));
     }
 
     return (

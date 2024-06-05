@@ -25,9 +25,6 @@ export default function Index({ listings, filters }: IndexProps) {
                             <Link href={route("listing.show", listing.id)}>
                                 <Address listing={listing} isCard />
                             </Link>
-                            <Link href={route("listing.edit", listing.id)}>
-                                Edit
-                            </Link>
                         </Box>
                     );
                 })}

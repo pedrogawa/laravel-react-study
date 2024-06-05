@@ -43,7 +43,7 @@ export default function Edit({ listing }: EditProps) {
 
     function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        put(route("listing.update", listing.id));
+        put(route("realtor.listing.update", listing.id));
     }
 
     return (

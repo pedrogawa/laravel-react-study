@@ -41,7 +41,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                                 </Link>
 
                                 <Link
-                                    href={route("listing.create")}
+                                    href={route("realtor.listing.create")}
                                     className="btn-primary"
                                 >
                                     + New Listing

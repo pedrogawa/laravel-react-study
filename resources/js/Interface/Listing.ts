@@ -10,4 +10,5 @@ export default interface Listing {
     street: string;
     street_nr: string;
     updated_at: Date;
+    deleted_at: Date;
 }
