@@ -56,6 +56,7 @@ export default function RealtorFilters({ filters }: RealtorFiltersProps) {
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, checked } = event.target;
         updateFormData(name, checked, setData, data);
+
         debouncedGet();
     }
 

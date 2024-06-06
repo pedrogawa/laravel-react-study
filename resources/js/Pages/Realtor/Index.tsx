@@ -43,61 +43,75 @@ export default function Realtor({ listings, filters }: RealtorProps) {
                                         {listing.city}
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                                    <a
-                                        href={route("listing.show", {
-                                            listing: listing.id,
-                                        })}
-                                        className={`btn-outline text-xs font-medium`}
-                                        style={{
-                                            pointerEvents: listing.deleted_at
-                                                ? "none"
-                                                : "all",
-                                        }}
-                                        target="_blank"
-                                    >
-                                        Preview
-                                    </a>
-                                    <Link
-                                        href={route(
-                                            "realtor.listing.edit",
-                                            listing.id
+                                <section className="flex flex-col gap-2">
+                                    <div className="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+                                        <a
+                                            href={route("listing.show", {
+                                                listing: listing.id,
+                                            })}
+                                            className={`btn-outline text-xs font-medium`}
+                                            style={{
+                                                pointerEvents:
+                                                    listing.deleted_at
+                                                        ? "none"
+                                                        : "all",
+                                            }}
+                                            target="_blank"
+                                        >
+                                            Preview
+                                        </a>
+                                        <Link
+                                            href={route(
+                                                "realtor.listing.edit",
+                                                listing.id
+                                            )}
+                                            className="btn-outline text-xs font-medium"
+                                        >
+                                            Edit
+                                        </Link>
+                                        {!listing.deleted_at && (
+                                            <Link
+                                                href={route(
+                                                    "realtor.listing.destroy",
+                                                    {
+                                                        listing: listing.id,
+                                                    }
+                                                )}
+                                                as="button"
+                                                method="delete"
+                                                className="btn-outline text-xs font-medium"
+                                            >
+                                                Delete
+                                            </Link>
                                         )}
-                                        className="btn-outline text-xs font-medium"
-                                    >
-                                        Edit
-                                    </Link>
-                                    {!listing.deleted_at && (
+                                        {listing.deleted_at && (
+                                            <Link
+                                                href={route(
+                                                    "realtor.listing.restore",
+                                                    {
+                                                        listing: listing.id,
+                                                    }
+                                                )}
+                                                method="put"
+                                                as="button"
+                                                className="btn-outline text-xs font-medium"
+                                            >
+                                                Restore
+                                            </Link>
+                                        )}
+                                    </div>
+                                    <div>
                                         <Link
                                             href={route(
-                                                "realtor.listing.destroy",
-                                                {
-                                                    listing: listing.id,
-                                                }
+                                                "realtor.listing.image.create",
+                                                { listing: listing.id }
                                             )}
-                                            as="button"
-                                            method="delete"
-                                            className="btn-outline text-xs font-medium"
+                                            className="block w-full btn-outline text-xs font-medium text-center"
                                         >
-                                            Delete
+                                            Images
                                         </Link>
-                                    )}
-                                    {listing.deleted_at && (
-                                        <Link
-                                            href={route(
-                                                "realtor.listing.restore",
-                                                {
-                                                    listing: listing.id,
-                                                }
-                                            )}
-                                            method="put"
-                                            as="button"
-                                            className="btn-outline text-xs font-medium"
-                                        >
-                                            Restore
-                                        </Link>
-                                    )}
-                                </div>
+                                    </div>
+                                </section>
                             </div>
                         </Box>
                     );
