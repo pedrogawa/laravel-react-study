@@ -50,10 +50,6 @@ export default function Create({ listing }: CreateProps) {
         (document.getElementById("images") as HTMLInputElement).value = "";
     }
 
-    const filesNames = data.images.map((file) => file.name).join(", ");
-
-    console.log(filesNames);
-
     return (
         <Box title="Upload new images">
             <form onSubmit={handleSubmit} className="flex">
@@ -66,7 +62,11 @@ export default function Create({ listing }: CreateProps) {
                     onChange={handleChange}
                 />
                 <div className="flex gap-4">
-                    <button type="submit" className="btn-outline">
+                    <button
+                        type="submit"
+                        className="btn-outline"
+                        disabled={data.images.length === 0}
+                    >
                         Upload
                     </button>
                     <button className="btn-outline" onClick={clearForm}>
