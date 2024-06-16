@@ -1,3 +1,5 @@
+import Image from "./Image";
+
 export default interface Listing {
     id: number;
     area: number;
@@ -11,4 +13,5 @@ export default interface Listing {
     street_nr: string;
     updated_at: Date;
     deleted_at: Date;
+    images: Image[];
 }

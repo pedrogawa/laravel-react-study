@@ -32,7 +32,14 @@ export default function Show({ listing }: ShowProps) {
         <div className="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
             <Box className="md:col-span-7 flex items-center w-full">
                 <div className="w-full text-center font-medium text-gray-500">
-                    No images
+                    {listing.images.length === 0 && <>No Images</>}
+                    {listing.images.map((image) => {
+                        return (
+                            <div className="grid grid-cols-2 gap-1">
+                                <img src={image.src} alt="" />
+                            </div>
+                        );
+                    })}
                 </div>
             </Box>
             <div className="md:col-span-5 flex flex-col gap-4">

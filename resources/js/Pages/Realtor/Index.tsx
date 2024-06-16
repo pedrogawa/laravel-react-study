@@ -8,8 +8,12 @@ import { Link } from "@inertiajs/inertia-react";
 import { useRoute } from "ziggy-js";
 import RealtorFilters from "./Components/Filters";
 
+type ListingWithCount = Listing & {
+    images_count: number;
+};
+
 interface RealtorProps {
-    listings: Pagination<Listing>;
+    listings: Pagination<ListingWithCount>;
     filters: {
         by: string;
         deleted: boolean;
@@ -19,7 +23,7 @@ interface RealtorProps {
 
 export default function Realtor({ listings, filters }: RealtorProps) {
     const route = useRoute();
-
+    console.log(listings.data);
     return (
         <div className="flex flex-col gap-8">
             <RealtorFilters filters={filters} />
@@ -108,7 +112,7 @@ export default function Realtor({ listings, filters }: RealtorProps) {
                                             )}
                                             className="block w-full btn-outline text-xs font-medium text-center"
                                         >
-                                            Images
+                                            Images ({listing.images_count})
                                         </Link>
                                     </div>
                                 </section>
