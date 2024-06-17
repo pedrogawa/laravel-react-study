@@ -1,5 +1,5 @@
 interface FormInputProps {
-    className: string;
+    className?: string;
     handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     value: string | number;
     name: string;
@@ -29,7 +29,7 @@ export default function FormInput({
             password_confirmation: "Confirm Password",
         };
 
-        return label[name] ?? "Unnamed";
+        return label[name] ?? "";
     }
 
     return (

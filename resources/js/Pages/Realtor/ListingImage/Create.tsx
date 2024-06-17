@@ -1,11 +1,16 @@
 import Box from "@/Components/Box";
+import Image from "@/Interface/Image";
 import Listing from "@/Interface/Listing";
 import { Link, useForm } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
 import { useRoute } from "ziggy-js";
 
+type ListingWithImages = Listing & {
+    images: Image[];
+};
+
 interface CreateProps {
-    listing: Listing;
+    listing: ListingWithImages;
 }
 
 interface FormData {

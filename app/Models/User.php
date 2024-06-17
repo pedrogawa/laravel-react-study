@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Offer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -57,5 +58,9 @@ class User extends Authenticatable
 
     public function listings(): HasMany {
         return $this->hasMany(\App\Models\Listing::class, 'by_user_id');
+    }
+
+    public function offers(): HasMany {
+        return $this->hasMany(Offer::class, 'bidder_id');
     }
 }

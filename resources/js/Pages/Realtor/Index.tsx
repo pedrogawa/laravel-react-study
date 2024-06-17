@@ -10,6 +10,7 @@ import RealtorFilters from "./Components/Filters";
 
 type ListingWithCount = Listing & {
     images_count: number;
+    offers_count: number;
 };
 
 interface RealtorProps {
@@ -23,7 +24,6 @@ interface RealtorProps {
 
 export default function Realtor({ listings, filters }: RealtorProps) {
     const route = useRoute();
-    console.log(listings.data);
     return (
         <div className="flex flex-col gap-8">
             <RealtorFilters filters={filters} />
@@ -113,6 +113,17 @@ export default function Realtor({ listings, filters }: RealtorProps) {
                                             className="block w-full btn-outline text-xs font-medium text-center"
                                         >
                                             Images ({listing.images_count})
+                                        </Link>
+                                    </div>
+                                    <div>
+                                        <Link
+                                            href={route(
+                                                "realtor.listing.show",
+                                                { listing: listing.id }
+                                            )}
+                                            className="block w-full btn-outline text-xs font-medium text-center"
+                                        >
+                                            Offers ({listing.offers_count})
                                         </Link>
                                     </div>
                                 </section>

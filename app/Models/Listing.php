@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Offer;
 use App\Models\ListingImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +15,7 @@ class Listing extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'code', 'price'];
+    protected $fillable = ['beds', 'baths', 'area', 'city', 'code', 'street', 'street_nr', 'code', 'pPrice'];
     protected $sortable = ['price', 'beds', 'baths', 'area', 'created_at'];
 
     public function owner(): BelongsTo {
@@ -23,6 +24,10 @@ class Listing extends Model
 
     public function images(): HasMany {
         return $this->hasMany(ListingImage::class);
+    }
+
+    public function offers(): HasMany {
+        return $this->hasMany(Offer::class, 'listing_id');
     }
 
     public function scopeMostRecent(Builder $query): Builder {

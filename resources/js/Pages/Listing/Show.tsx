@@ -1,17 +1,31 @@
 import Address from "@/Components/Address";
 import Price from "@/Components/Address/Price";
 import Box from "@/Components/Box";
+import Image from "@/Interface/Image";
 import Listing from "@/Interface/Listing";
+import Offer from "@/Interface/Offer";
 import calculateMonthlyPayment from "@/Utils/calculateMonthlyPayment";
+import { usePage } from "@inertiajs/inertia-react";
 import React, { useState } from "react";
+import MakeOffer from "./Components/MakeOffer";
+import OfferMade from "./Components/OfferMade";
+
+type ListingWithImages = Listing & {
+    images: Image[];
+};
 
 interface ShowProps {
-    listing: Listing;
+    listing: ListingWithImages;
+    offer: Offer;
 }
 
-export default function Show({ listing }: ShowProps) {
+export default function Show({ listing, offer }: ShowProps) {
+    console.log(offer);
+    const { user } = usePage().props as any;
+
     const [interestSlider, setInterestSlider] = useState(2.5);
     const [durationSlider, setDurationSlider] = useState(25);
+    const [price, setPrice] = useState(listing.price);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { value, name } = event.target;
@@ -25,17 +39,21 @@ export default function Show({ listing }: ShowProps) {
         }
     }
 
+    function handlePriceChange(newPrice: number) {
+        setPrice(newPrice);
+    }
+
     const { monthlyPayment, totalPaid, totalInterest } =
-        calculateMonthlyPayment(interestSlider, listing.price, durationSlider);
+        calculateMonthlyPayment(interestSlider, price, durationSlider);
 
     return (
         <div className="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
             <Box className="md:col-span-7 flex items-center w-full">
                 <div className="w-full text-center font-medium text-gray-500">
                     {listing.images.length === 0 && <>No Images</>}
-                    {listing.images.map((image) => {
+                    {listing.images.map((image, index) => {
                         return (
-                            <div className="grid grid-cols-2 gap-1">
+                            <div className="grid grid-cols-2 gap-1" key={index}>
                                 <img src={image.src} alt="" />
                             </div>
                         );
@@ -108,6 +126,14 @@ export default function Show({ listing }: ShowProps) {
                         </div>
                     </div>
                 </Box>
+                {user && !offer && (
+                    <MakeOffer
+                        id={listing.id}
+                        price={listing.price}
+                        handlePriceChange={handlePriceChange}
+                    />
+                )}
+                {offer?.created_at && <OfferMade offer={offer} />}
             </div>
         </div>
     );

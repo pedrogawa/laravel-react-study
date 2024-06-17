@@ -5,6 +5,7 @@ import { useRoute } from "ziggy-js";
 
 export default function Create() {
     const route = useRoute();
+
     const { data, setData, post, errors } = useForm({
         beds: "",
         baths: "",
