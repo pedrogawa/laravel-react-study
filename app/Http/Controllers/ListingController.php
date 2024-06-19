@@ -27,7 +27,9 @@ class ListingController extends Controller
         return inertia('Listing/Index',
         [
             'filters' => $filters,
-            'listings' => $query->paginate(10)
+            'listings' => $query
+                ->withoutSold()
+                ->paginate(10)
                 ->withQueryString()
         ]);
     }

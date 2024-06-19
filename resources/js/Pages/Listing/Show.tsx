@@ -1,6 +1,7 @@
 import Address from "@/Components/Address";
 import Price from "@/Components/Address/Price";
 import Box from "@/Components/Box";
+import EmptyState from "@/Components/EmptyState";
 import Image from "@/Interface/Image";
 import Listing from "@/Interface/Listing";
 import Offer from "@/Interface/Offer";
@@ -48,7 +49,7 @@ export default function Show({ listing, offer }: ShowProps) {
 
     return (
         <div className="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
-            <Box className="md:col-span-7 flex items-center w-full">
+            <EmptyState>
                 <div className="w-full text-center font-medium text-gray-500">
                     {listing.images.length === 0 && <>No Images</>}
                     {listing.images.map((image, index) => {
@@ -59,7 +60,7 @@ export default function Show({ listing, offer }: ShowProps) {
                         );
                     })}
                 </div>
-            </Box>
+            </EmptyState>
             <div className="md:col-span-5 flex flex-col gap-4">
                 <Box title="Basic info">
                     <Address listing={listing} isCard={false} />
